@@ -23,6 +23,12 @@ describe EmojiData do
     end
   end
 
+  describe ".all_with_skin_variants" do
+    it "should return an array of all 64 known emoji chars with skin variations" do
+      EmojiData.all_with_skin_variants.count.should eq(64)
+    end
+  end
+
   describe ".chars" do
     it "should return an array of all chars in unicode string format" do
       EmojiData.chars.all? {|char| char.class == String}.should be_true
@@ -93,6 +99,9 @@ describe EmojiData do
       @skin_variant[0].name.should eq('PERSON BOWING DEEPLY')
       @skin_variant[1].name.should eq('EMOJI MODIFIER FITZPATRICK TYPE-3')
     end
+    it "should match combined emojis" do
+      EmojiData.scan("👩‍❤️‍👩").size.should eq(1)
+    end
   end
 
   describe ".find_by_str - DEPRECATED" do
@@ -114,6 +123,10 @@ describe EmojiData do
       results = EmojiData.from_unified('2764-fe0f')
       results.should_not be_nil
       results.name.should eq('HEAVY BLACK HEART')
+    end
+    it "should find skin variants as well" do
+      results = EmojiData.from_unified('1f442-1f3ff')
+      results.should_not be_nil
     end
   end
 
