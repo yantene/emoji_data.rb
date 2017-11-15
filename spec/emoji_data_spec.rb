@@ -3,8 +3,8 @@ require 'spec_helper'
 
 describe EmojiData do
   describe ".all" do
-    it "should return an array of all 1299 known emoji chars" do
-      EmojiData.all.count.should eq(1299)
+    it "should return an array of all 1489 known emoji chars" do
+      EmojiData.all.count.should eq(1489)
     end
     it "should return all EmojiChar objects" do
       EmojiData.all.all? {|char| char.class == EmojiData::EmojiChar}.should be_true
@@ -12,20 +12,20 @@ describe EmojiData do
   end
 
   describe ".all_doublebyte" do
-    it "should return an array of all 287 known emoji chars with doublebyte encoding" do
-      EmojiData.all_doublebyte.count.should eq(287)
+    it "should return an array of all 401 known emoji chars with doublebyte encoding" do
+      EmojiData.all_doublebyte.count.should eq(401)
     end
   end
 
   describe ".all_with_variants" do
-    it "should return an array of all 117 known emoji chars with variant encodings" do
-      EmojiData.all_with_variants.count.should eq(117)
+    it "should return an array of all 148 known emoji chars with variant encodings" do
+      EmojiData.all_with_variants.count.should eq(148)
     end
   end
 
   describe ".all_with_skin_variants" do
-    it "should return an array of all 64 known emoji chars with skin variations" do
-      EmojiData.all_with_skin_variants.count.should eq(64)
+    it "should return an array of all 180 known emoji chars with skin variations" do
+      EmojiData.all_with_skin_variants.count.should eq(180)
     end
   end
 
@@ -177,8 +177,11 @@ describe EmojiData do
     it "matches unicode 8.0 emoji" do
       EmojiData.from_short_name('taco').should_not be_nil
     end
+    it "matches unicode 9.0 emoji" do
+      EmojiData.from_short_name('bacon').should_not be_nil
+    end
     it "returns nil if nothing matches" do
-      EmojiData.from_short_name('bacon').should be_nil
+      EmojiData.from_short_name('sukiyaki').should be_nil
     end
   end
 
